@@ -15,7 +15,7 @@ jobs:
   deploy:
     name: Deploy tag to SVN
     runs-on: ubuntu-latest
-    # Off until the founder sets the ENABLE_WPORG_DEPLOY repository variable to "true".
+    # Off until the ENABLE_WPORG_DEPLOY repository variable is set to "true".
     if: vars.ENABLE_WPORG_DEPLOY == 'true'
     steps:
       - uses: actions/checkout@v4

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Runs Composer, PHPUnit and PHPCS in Docker so nothing is installed on the host.
+set -euo pipefail
+
+# The plugin folder, mounted into the container.
+plugin_dir="$(cd "$(dirname "$0")/.." && pwd)"
+
+# The official Composer image carries PHP; override with COMPOSER_IMAGE.
+composer_image="${COMPOSER_IMAGE:-composer:2.8.4}"
+
+# Runs one command inside the image as the current user.
+run_in_container() {
+	docker run --rm -t \
+		--user "$(id -u):$(id -g)" \
+		--env COMPOSER_HOME=/tmp/composer \
+		--volume "$plugin_dir:/app" \
+		--workdir /app \
+		"$composer_image" "$@"
+}
+
+case "${1:-}" in
+	install) run_in_container composer install --no-interaction --no-progress ;;
+	test) run_in_container vendor/bin/phpunit "${@:2}" ;;
+	lint) run_in_container vendor/bin/phpcs "${@:2}" ;;
+	fix) run_in_container vendor/bin/phpcbf "${@:2}" ;;
+	*) echo "usage: bin/docker install|test|lint|fix [args]" >&2; exit 64 ;;
+esac

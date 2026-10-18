@@ -31,7 +31,8 @@ bin/docker lint      # PHPCS with WordPress Coding Standards
 ## Releasing to wordpress.org
 
 `.github/workflows/deploy.yml` deploys a tag to the plugin's SVN repository with [10up/action-wordpress-plugin-deploy](https://github.com/10up/action-wordpress-plugin-deploy).
-It needs the `SVN_USERNAME` and `SVN_PASSWORD` repository secrets. Files listed in `.distignore` are left out of the release.
+It runs only when the repository variable `ENABLE_WPORG_DEPLOY` is `true`, and needs the `SVN_USERNAME` and `SVN_PASSWORD` secrets.
+The tag must equal the plugin `Version` and readme `Stable tag`. Files in `.distignore` are left out; banners and icons go in `.wordpress-org/`.
 
 ## License
 

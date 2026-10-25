@@ -38,3 +38,6 @@ require_once __DIR__ . '/includes/class-simpledatalogs-plugin-bootstrap.php';
 
 // Wire every part of the plugin once WordPress has loaded the other plugins.
 add_action( 'plugins_loaded', array( 'SimpleDataLogs_Plugin_Bootstrap', 'boot' ) );
+
+// Declare WooCommerce order tables (HPOS) support before WooCommerce starts.
+add_action( 'before_woocommerce_init', array( 'SimpleDataLogs_Plugin_Bootstrap', 'declare_woocommerce_compatibility' ) );

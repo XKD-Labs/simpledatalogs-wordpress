@@ -34,4 +34,15 @@ final class SimpleDataLogs_Plugin_Bootstrap {
 			( new SimpleDataLogs_Admin( $sender ) )->register_hooks();
 		}
 	}
+
+	/**
+	 * Tells WooCommerce the plugin works with its order tables (HPOS); orders are only read through wc_get_order.
+	 *
+	 * @return void
+	 */
+	public static function declare_woocommerce_compatibility() {
+		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', SIMPLEDATALOGS_PLUGIN_FILE, true );
+		}
+	}
 }

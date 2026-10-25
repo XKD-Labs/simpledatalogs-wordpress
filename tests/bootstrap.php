@@ -8,6 +8,7 @@
 // Composer's autoloader, the class stubs and the base test case.
 require_once dirname( __DIR__ ) . '/vendor/autoload.php';
 require_once __DIR__ . '/stubs.php';
+require_once __DIR__ . '/stub-woocommerce-features-util.php';
 require_once __DIR__ . '/class-simpledatalogs-test-case.php';
 
 // The constants the main plugin file defines.
@@ -25,3 +26,4 @@ require_once $simpledatalogs_include_dir . 'class-simpledatalogs-sender.php';
 require_once $simpledatalogs_include_dir . 'class-simpledatalogs-frontend.php';
 require_once $simpledatalogs_include_dir . 'class-simpledatalogs-server-events.php';
 require_once $simpledatalogs_include_dir . 'class-simpledatalogs-admin.php';
+require_once $simpledatalogs_include_dir . 'class-simpledatalogs-plugin-bootstrap.php';

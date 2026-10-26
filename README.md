@@ -30,9 +30,16 @@ bin/docker lint      # PHPCS with WordPress Coding Standards
 
 ## Releasing to wordpress.org
 
-`.github/workflows/deploy.yml` deploys a tag to the plugin's SVN repository with [10up/action-wordpress-plugin-deploy](https://github.com/10up/action-wordpress-plugin-deploy).
-It runs only when the repository variable `ENABLE_WPORG_DEPLOY` is `true`, and needs the `SVN_USERNAME` and `SVN_PASSWORD` secrets.
-The tag must equal the plugin `Version` and readme `Stable tag`. Files in `.distignore` are left out; banners and icons go in `.wordpress-org/`.
+Releases go to the plugin's SVN repository from a maintainer's machine; nothing runs on GitHub.
+The version must equal the plugin `Version` and readme `Stable tag`. Files in `.distignore` are left out; banners and icons go in `.wordpress-org/`.
+
+```sh
+svn checkout https://plugins.svn.wordpress.org/simpledatalogs /tmp/simpledatalogs-svn
+rsync -a --delete --exclude-from=.distignore ./ /tmp/simpledatalogs-svn/trunk/
+rsync -a --delete .wordpress-org/ /tmp/simpledatalogs-svn/assets/
+cd /tmp/simpledatalogs-svn && svn add --force trunk assets && svn copy trunk tags/0.1.0
+svn commit -m "Release 0.1.0"
+```
 
 ## License
 

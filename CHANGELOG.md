@@ -12,4 +12,4 @@ All notable changes to this plugin are listed here. The format follows [Keep a C
 - Server-side events with the public key: `user_registered`, `user_logged_in`, `comment_posted`, and with WooCommerce `order_completed` and `add_to_cart`; `event_id` and `ts` set when each happens, sent in one non-blocking batch per request.
 - "Send test event" button that sends `setup_test` and shows the answer.
 - `uninstall.php` removing the option (every site on a network).
-- PHPUnit tests with Brain Monkey, PHPCS with WordPress Coding Standards, CI and a wordpress.org deploy workflow.
+- PHPUnit tests with Brain Monkey and PHPCS with WordPress Coding Standards, run locally.
